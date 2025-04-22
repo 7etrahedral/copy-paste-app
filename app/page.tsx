@@ -1,9 +1,31 @@
 import Image from "next/image";
 
+import { useState } from 'react';
+
 export default function Home() {
+  const [inputText, setInputText] = useState('');
+  const [displayText, setDisplayText] = useState('');
+  const [bgColor, setBgColor] = useState('#ffffff');
+
+  const handleDisplayText = () => {
+    setDisplayText(inputText);
+  };
+
+  const handleChangeColor = () => {
+    setBgColor(bgColor === '#ffffff' ? '#f0f0f0' : '#ffffff');
+  };
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+            <input
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="Type something..."
+            />
+            <button onClick={handleDisplayText}>Display Text</button>
+            <p>{displayText}</p>
+            <button onClick={handleChangeColor}>Change Background Color</button>
         <Image
           className="dark:invert"
           src="/next.svg"
